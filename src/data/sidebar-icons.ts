@@ -2,9 +2,7 @@ import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { faCodeBranch, faInfoCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const sidebarIconsTop = {
-    directories: faFolder,
-    git: faCodeBranch,
-    search: faSearch
+    directories: faFolder
 }
 
 const sidebarIconsBottom = {
