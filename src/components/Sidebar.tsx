@@ -1,4 +1,4 @@
-import { sidebarIconsTop, sidebarIconsBottom } from "../data/sidebar-icons";
+import { sidebarIconsTop } from "../data/sidebar-icons";
 import List from "./shared/List";
 import ExplorerTree from "./shared/ExplorerTree";
 import root from "../data/folder";
