@@ -62,7 +62,7 @@ export default function Editor({ content, file }: EditorProps) {
     const cleanedContent = cleanContent(displayContent);
 
     return (
-        <div className="bg-[#1e1e1e] text-sm flex flex-col h-[100vh] w-full">
+        <div className="bg-[#1e1e1e] text-sm flex flex-col h-[80vh] w-full">
             <div className="px-4 py-2 border-b border-gray-700 bg-[#2d2d30] text-yellow-400 font-mono text-xs flex items-center flex-shrink-0">
                 <span className="mr-2">📄</span>
                 <span>File: {file}</span>
