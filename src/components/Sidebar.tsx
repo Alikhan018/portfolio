@@ -15,9 +15,9 @@ export default function Sidebar({ onOpenFile }: SidebarProps) {
                     <div>
                         <List list={sidebarIconsTop} />
                     </div>
-                    <div>
+                    {/* <div>
                         <List list={sidebarIconsBottom} />
-                    </div>
+                    </div> */}
                 </div>
                 <div className="w-full">
                     <div className="flex border-b border-gray-700 p-3">
