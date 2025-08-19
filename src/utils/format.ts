@@ -5,7 +5,8 @@ import parserHtml from "prettier/parser-html";
 import parserMarkdown from "prettier/parser-markdown";
 import parserPostcss from "prettier/parser-postcss";
 
-export async function formatContent(content: string, file: string) {
+export async function formatContent(content: string | undefined, file: string) {
+    if (!content) return;
     const ext = file.split(".").pop();
     let parser: any = "babel";
 

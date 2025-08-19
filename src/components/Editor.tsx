@@ -4,7 +4,7 @@ import { formatContent } from "../utils/format";
 import { useEffect, useState } from "react";
 
 interface EditorProps {
-    content: string;
+    content: string | undefined;
     file: string;
 }
 
@@ -31,7 +31,7 @@ const getLanguageFromFile = (filename: string): string => {
 };
 
 export default function Editor({ content, file }: EditorProps) {
-    const [formatted, setFormatted] = useState<string | null>(null);
+    const [formatted, setFormatted] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -49,7 +49,8 @@ export default function Editor({ content, file }: EditorProps) {
         format();
     }, [content, file]);
 
-    const cleanContent = (rawContent: string): string => {
+    const cleanContent = (rawContent: string | undefined): string | undefined => {
+        if (!rawContent) return;
         return rawContent
             .replace(/^\s*\n/, '')
             .replace(/\n\s*$/, '')
@@ -69,39 +70,40 @@ export default function Editor({ content, file }: EditorProps) {
                 {isLoading && <span className="ml-2 text-gray-400">Formatting...</span>}
             </div>
             <div className="flex-1 overflow-y-auto">
-                <SyntaxHighlighter
-                    language={getLanguageFromFile(file)}
-                    style={vscDarkPlus}
-                    showLineNumbers={true}
-                    wrapLines={true}
-                    lineNumberStyle={{
-                        color: '#858585',
-                        backgroundColor: '#1e1e1e',
-                        paddingLeft: '10px',
-                        paddingRight: '10px',
-                        borderRight: '1px solid #3e3e42',
-                        fontSize: '12px',
-                        minWidth: '40px'
-                    }}
-                    customStyle={{
-                        background: 'transparent',
-                        padding: '1rem',
-                        margin: 0,
-                        fontSize: '14px',
-                        lineHeight: '1.5',
-                        fontFamily: '"Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace',
-                        height: 'auto',
-                        minHeight: '100%'
-                    }}
-                    codeTagProps={{
-                        style: {
+                {cleanedContent &&
+                    <SyntaxHighlighter
+                        language={getLanguageFromFile(file)}
+                        style={vscDarkPlus}
+                        showLineNumbers={true}
+                        wrapLines={true}
+                        lineNumberStyle={{
+                            color: '#858585',
+                            backgroundColor: '#1e1e1e',
+                            paddingLeft: '10px',
+                            paddingRight: '10px',
+                            borderRight: '1px solid #3e3e42',
+                            fontSize: '12px',
+                            minWidth: '40px'
+                        }}
+                        customStyle={{
+                            background: 'transparent',
+                            padding: '1rem',
+                            margin: 0,
+                            fontSize: '14px',
+                            lineHeight: '1.5',
                             fontFamily: '"Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace',
-                            fontSize: '14px'
-                        }
-                    }}
-                >
-                    {cleanedContent}
-                </SyntaxHighlighter>
+                            height: 'auto',
+                            minHeight: '100%'
+                        }}
+                        codeTagProps={{
+                            style: {
+                                fontFamily: '"Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace',
+                                fontSize: '14px'
+                            }
+                        }}
+                    >
+                        {cleanedContent}
+                    </SyntaxHighlighter>}
             </div>
         </div>
     );
